@@ -45,7 +45,7 @@ import de.symeda.sormas.api.i18n.Strings;
 import de.symeda.sormas.api.person.PresentCondition;
 import de.symeda.sormas.api.sample.DashboardSampleDto;
 import de.symeda.sormas.api.sample.DashboardTestResultDto;
-import de.symeda.sormas.api.sample.SampleTestResultType;
+import de.symeda.sormas.api.sample.PathogenTestResultType;
 import de.symeda.sormas.api.task.DashboardTaskDto;
 import de.symeda.sormas.api.task.TaskPriority;
 import de.symeda.sormas.api.task.TaskStatus;
@@ -476,13 +476,13 @@ public class DashboardSurveillanceStatisticsComponent extends AbstractDashboardS
 		int newTestResultsCount = dashboardTestResultDtos.size();
 		fourthComponent.updateCountLabel(newTestResultsCount);
 
-		int positiveTestResultsCount = (int) dashboardTestResultDtos.stream().filter(r -> r.getTestResult() == SampleTestResultType.POSITIVE).count();
+		int positiveTestResultsCount = (int) dashboardTestResultDtos.stream().filter(r -> r.getTestResult() == PathogenTestResultType.POSITIVE).count();
 		testResultPositive.updateCountLabel(positiveTestResultsCount);
-		int negativeTestResultsCount = (int) dashboardTestResultDtos.stream().filter(r -> r.getTestResult() == SampleTestResultType.NEGATIVE).count();
+		int negativeTestResultsCount = (int) dashboardTestResultDtos.stream().filter(r -> r.getTestResult() == PathogenTestResultType.NEGATIVE).count();
 		testResultNegative.updateCountLabel(negativeTestResultsCount);
-		int pendingTestResultsCount = (int) dashboardTestResultDtos.stream().filter(r -> r.getTestResult() == SampleTestResultType.PENDING).count();
+		int pendingTestResultsCount = (int) dashboardTestResultDtos.stream().filter(r -> r.getTestResult() == PathogenTestResultType.PENDING).count();
 		testResultPending.updateCountLabel(pendingTestResultsCount);
-		int indeterminateTestResultsCount = (int) dashboardTestResultDtos.stream().filter(r -> r.getTestResult() == SampleTestResultType.INDETERMINATE).count();
+		int indeterminateTestResultsCount = (int) dashboardTestResultDtos.stream().filter(r -> r.getTestResult() == PathogenTestResultType.INDETERMINATE).count();
 		testResultIndeterminate.updateCountLabel(indeterminateTestResultsCount);
 
 		if ((currentDisease == null && previousDisease != null) || (previousDisease == null && currentDisease != null)) {
@@ -515,7 +515,7 @@ public class DashboardSurveillanceStatisticsComponent extends AbstractDashboardS
 			// Create a map with all diseases as keys and their respective positive test result counts as values
 			Map<Disease, Integer> diseaseMap = new TreeMap<Disease, Integer>();
 			for (Disease disease : Disease.values()) {
-				diseaseMap.put(disease, (int) dashboardTestResultDtos.stream().filter(r -> r.getTestResult() == SampleTestResultType.POSITIVE && r.getDisease() == disease).count());
+				diseaseMap.put(disease, (int) dashboardTestResultDtos.stream().filter(r -> r.getTestResult() == PathogenTestResultType.POSITIVE && r.getDisease() == disease).count());
 			}
 
 			// Create a list from this map that sorts the entries by test result counts

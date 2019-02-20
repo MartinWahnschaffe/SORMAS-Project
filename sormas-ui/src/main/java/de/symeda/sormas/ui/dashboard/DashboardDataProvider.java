@@ -73,8 +73,8 @@ public class DashboardDataProvider {
 		setEvents(FacadeProvider.getEventFacade().getNewEventsForDashboard(region, district, disease, fromDate, toDate, userUuid));
 		setPreviousEvents(FacadeProvider.getEventFacade().getNewEventsForDashboard(region, district, disease, previousFromDate, previousToDate, userUuid));
 		// Test results
-		setTestResults(FacadeProvider.getSampleTestFacade().getNewTestResultsForDashboard(region, district, disease, fromDate, toDate, userUuid));
-		setPreviousTestResults(FacadeProvider.getSampleTestFacade().getNewTestResultsForDashboard(region, district, disease, previousFromDate, previousToDate, userUuid));
+		setTestResults(FacadeProvider.getPathogenTestFacade().getNewTestResultsForDashboard(region, district, disease, fromDate, toDate, userUuid));
+		setPreviousTestResults(FacadeProvider.getPathogenTestFacade().getNewTestResultsForDashboard(region, district, disease, previousFromDate, previousToDate, userUuid));
 		// Samples
 		setSamples(FacadeProvider.getSampleFacade().getNewSamplesForDashboard(region, district, disease, fromDate, toDate, userUuid));
 		// Tasks

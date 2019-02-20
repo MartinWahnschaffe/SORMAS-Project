@@ -131,6 +131,11 @@ public abstract class AbstractEditForm <DTO extends EntityDto> extends CustomFie
 						return field;
 					}
 				}
+				else if (Boolean.class.isAssignableFrom(type)) {
+					OptionGroup field = createBooleanField(OptionGroup.class);
+					CssStyles.style(field, ValoTheme.OPTIONGROUP_HORIZONTAL, CssStyles.OPTIONGROUP_CAPTION_INLINE);
+					return (T) field;
+				}
 				else if (AbstractSelect.class.isAssignableFrom(fieldType)) {
 					AbstractSelect field = createCompatibleSelect((Class<? extends AbstractSelect>) fieldType);
 					field.setNullSelectionAllowed(true);
@@ -189,6 +194,21 @@ public abstract class AbstractEditForm <DTO extends EntityDto> extends CustomFie
 				textField.setNullRepresentation("");
 				return textField;
 			}
+			
+			@SuppressWarnings({ "unchecked", "rawtypes" })
+			@Override
+			protected <T extends Field> T createBooleanField(Class<T> fieldType) {
+				if (OptionGroup.class.isAssignableFrom(fieldType)) {
+					AbstractSelect s = createCompatibleSelect(OptionGroup.class);
+					s.addItem(Boolean.TRUE);
+					s.setItemCaption(Boolean.TRUE, I18nProperties.getEnumCaption(YesNoUnknown.YES));
+					s.addItem(Boolean.FALSE);
+					s.setItemCaption(Boolean.FALSE, I18nProperties.getEnumCaption(YesNoUnknown.NO));
+					return (T) s;
+				} else {
+					return super.createBooleanField(fieldType);
+				}
+		    }
 		});
 
 		setWidth(900, Unit.PIXELS);
